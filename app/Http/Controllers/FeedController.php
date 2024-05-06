@@ -16,7 +16,7 @@ class FeedController extends Controller
         // $idea->body = 'test';
         // $idea->save();
         return view('feed', [
-            'ideas' => Idea::orderBy('created_at', 'DESC')->get()
+            'ideas' => Idea::orderBy('created_at', 'DESC')->paginate(5)
         ]);
     }
 

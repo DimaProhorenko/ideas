@@ -9,6 +9,14 @@
                         </a></h5>
                 </div>
             </div>
+            <div class="d-flex gap-3 align-items-center">
+                <a href="{{ route('ideas.show', $idea->id) }}">View</a>
+                <form action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
+                    @method('delete')
+                    @csrf
+                    <button class="btn btn-danger btn-sm">X</button>
+                </form>
+            </div>
         </div>
     </div>
     <div class="card-body">

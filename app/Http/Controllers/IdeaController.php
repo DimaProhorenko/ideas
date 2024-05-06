@@ -9,7 +9,6 @@ class IdeaController extends Controller
 {
     public function store()
     {
-        dump(request()->get('idea'));
 
         request()->validate([
             'idea' => 'required|min:5|max:240'
@@ -18,5 +17,23 @@ class IdeaController extends Controller
         $idea = Idea::create(['body' => request()->get('idea')]);
 
         return redirect()->route('feed')->with('success', 'Idea was created');
+    }
+
+    public function destroy($id)
+    {
+        $idea = Idea::where('id', $id)->firstOrFail();
+
+        $idea->delete();
+
+        return redirect()->route('feed')->with('success', 'Ideas was deleted');
+    }
+
+    public function show(Idea $idea)
+    {
+        // dump($idea);
+
+        return view('idea.show', [
+            'idea' => $idea
+        ]);
     }
 }
