@@ -8,11 +8,11 @@
         @include('shared.submit_idea')
         <hr>
         @foreach ($ideas as $idea)
-            <div class="mt-3">
+            <div class="mb-3">
                 @include('idea.idea_card')
             </div>
         @endforeach
-        <div class="mt-3">
+        <div>
             {{ $ideas->links() }}
         </div>
     </div>

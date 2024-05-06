@@ -16,7 +16,6 @@ class FeedController extends Controller
         if (request()->has('search')) {
             $idea->where('body', 'like', '%' . request()->get('search') . '%');
         }
-
         return view('feed', [
             'ideas' => $idea->paginate(5)
         ]);

@@ -5,18 +5,20 @@
                 <img style="width:50px" class="me-2 avatar-sm rounded-circle"
                     src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Mario" alt="Mario Avatar">
                 <div>
-                    <h5 class="card-title mb-0"><a href="#"> Mario
+                    <h5 class="card-title mb-0"><a href="#"> {{ $idea->user->name }}
                         </a></h5>
                 </div>
             </div>
             <div class="d-flex gap-3 align-items-center">
                 <a href="{{ route('ideas.show', $idea->id) }}">View</a>
-                <a href="{{ route('ideas.edit', $idea->id) }}">Edit</a>
-                <form action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
-                    @method('delete')
-                    @csrf
-                    <button class="btn btn-danger btn-sm">X</button>
-                </form>
+                @if (auth()->id() === $idea->user_id)
+                    <a href="{{ route('ideas.edit', $idea->id) }}">Edit</a>
+                    <form action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
+                        @method('delete')
+                        @csrf
+                        <button class="btn btn-danger btn-sm">X</button>
+                    </form>
+                @endif
             </div>
         </div>
     </div>

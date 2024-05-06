@@ -10,11 +10,13 @@ class IdeaController extends Controller
     public function store()
     {
 
-        request()->validate([
+        $validated = request()->validate([
             'idea' => 'required|min:5|max:240'
         ]);
 
-        $idea = Idea::create(['body' => request()->get('idea')]);
+        $validated['user_id'] = auth()->id();
+
+        $idea = Idea::create(['body' => $validated['idea'], 'user_id' => $validated['user_id']]);
 
         return redirect()->route('feed')->with('success', 'Idea was created');
     }
@@ -22,6 +24,10 @@ class IdeaController extends Controller
     public function destroy($id)
     {
         $idea = Idea::where('id', $id)->firstOrFail();
+
+        if (auth()->id() !== $idea->user_id) {
+            abort(404);
+        }
 
         $idea->delete();
 
@@ -39,11 +45,17 @@ class IdeaController extends Controller
 
     public function edit(Idea $idea)
     {
+        if (auth()->id() !== $idea->user_id) {
+            abort(404);
+        }
         return view('idea.edit', compact('idea'));
     }
 
     public function update(Idea $idea)
     {
+        if (auth()->id() !== $idea->user_id) {
+            abort(404);
+        }
         request()->validate([
             'idea' => 'required|min:5|max:240'
         ]);

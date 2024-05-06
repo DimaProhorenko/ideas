@@ -27,7 +27,12 @@ class AuthController extends Controller
             'password' => Hash::make($validated['password'])
         ]);
 
-        return redirect()->route('feed')->with('success', 'Account created');
+        if (auth()->attempt($validated)) {
+            request()->session()->regenerate();
+            return redirect()->route('feed')->with('success', 'Account created');
+        }
+
+        return redirect()->route('feed')->with('error', 'Something went wrong');
     }
 
     public function login()

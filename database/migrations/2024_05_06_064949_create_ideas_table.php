@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('ideas', function (Blueprint $table) {
             $table->id();
             $table->string('body', 240);
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->unsignedInteger('liked')->default(0);
             $table->timestamps();
         });
