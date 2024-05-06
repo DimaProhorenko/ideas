@@ -10,18 +10,15 @@ class FeedController extends Controller
 
     public function index()
     {
-        // $idea = new Idea([
-        //     'body' => 'Hello ideas'
-        // ]);
-        // $idea->body = 'test';
-        // $idea->save();
-        return view('feed', [
-            'ideas' => Idea::orderBy('created_at', 'DESC')->paginate(5)
-        ]);
-    }
 
-    public function addIdea()
-    {
-        echo ('Idea created');
+        $idea = Idea::orderBy('created_at', 'DESC');
+
+        if (request()->has('search')) {
+            $idea->where('body', 'like', '%' . request()->get('search') . '%');
+        }
+
+        return view('feed', [
+            'ideas' => $idea->paginate(5)
+        ]);
     }
 }
