@@ -29,4 +29,9 @@ class AuthController extends Controller
 
         return redirect()->route('feed')->with('success', 'Account created');
     }
+
+    public function login()
+    {
+        return view('auth.login');
+    }
 }
