@@ -11,6 +11,7 @@
             </div>
             <div class="d-flex gap-3 align-items-center">
                 <a href="{{ route('ideas.show', $idea->id) }}">View</a>
+                <a href="{{ route('ideas.edit', $idea->id) }}">Edit</a>
                 <form action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
                     @method('delete')
                     @csrf

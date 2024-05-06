@@ -36,4 +36,20 @@ class IdeaController extends Controller
             'idea' => $idea
         ]);
     }
+
+    public function edit(Idea $idea)
+    {
+        return view('idea.edit', compact('idea'));
+    }
+
+    public function update(Idea $idea)
+    {
+        request()->validate([
+            'idea' => 'required|min:5|max:240'
+        ]);
+
+        $idea->body = request()->get('idea');
+        $idea->save();
+        return redirect()->route('ideas.show', $idea->id)->with('success', 'Idea was updated');
+    }
 }
