@@ -19,4 +19,9 @@ class FeedController extends Controller
             'ideas' => Idea::orderBy('created_at', 'DESC')->get()
         ]);
     }
+
+    public function addIdea()
+    {
+        echo ('Idea created');
+    }
 }

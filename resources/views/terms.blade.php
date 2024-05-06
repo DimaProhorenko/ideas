@@ -1,4 +1,4 @@
-@extends('shared.layout')
+@extends('layout.layout')
 
 @section('content')
     <h1>Terms</h1>
