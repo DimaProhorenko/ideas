@@ -34,4 +34,28 @@ class AuthController extends Controller
     {
         return view('auth.login');
     }
+
+    public function authenticate()
+    {
+        $validated = request()->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        if (auth()->attempt($validated)) {
+            request()->session()->regenerate();
+            return redirect()->route('feed')->with('success', 'Logged in successfully');
+        }
+
+        return redirect()->route('login')->with('error', 'Check provided credentials');
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return redirect()->route('feed')->with('success', 'Logged out successfully');
+    }
 }

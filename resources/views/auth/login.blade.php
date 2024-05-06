@@ -2,6 +2,7 @@
 
 @section('simple-content')
     <div class="col-12 col-sm-8 col-md-6 mx-auto">
+        @include ('shared.messages.error_message')
         <form class="form mt-5" action="{{ route('login') }}" method="POST">
             @csrf
             <h3 class="text-center text-dark">Login</h3>
