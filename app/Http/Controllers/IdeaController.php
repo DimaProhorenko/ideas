@@ -11,6 +11,10 @@ class IdeaController extends Controller
     {
         dump(request()->get('idea'));
 
+        request()->validate([
+            'idea' => 'required|min:5|max:240'
+        ]);
+
         $idea = Idea::create(['body' => request()->get('idea')]);
 
         return redirect()->route('feed')->with('success', 'Idea was created');

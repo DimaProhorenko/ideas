@@ -39,6 +39,7 @@
         </div>
         <div class="col-6">
             @include ('shared.messages.success_message')
+            @include ('shared.messages.error_message')
 
             @include('shared.submit_idea')
             <hr>
