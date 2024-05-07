@@ -7,11 +7,13 @@
 
         @include('shared.submit_idea')
         <hr>
-        @foreach ($ideas as $idea)
+        @forelse ($ideas as $idea)
             <div class="mb-3">
                 @include('idea.idea_card')
             </div>
-        @endforeach
+        @empty
+            <h3 class="text-center mt-4">No results found.</h3>
+        @endforelse
         <div>
             {{ $ideas->withQueryString()->links() }}
         </div>
