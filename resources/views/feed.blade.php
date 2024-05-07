@@ -13,7 +13,7 @@
             </div>
         @endforeach
         <div>
-            {{ $ideas->links() }}
+            {{ $ideas->withQueryString()->links() }}
         </div>
     </div>
 @endsection
