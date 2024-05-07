@@ -1,5 +1,6 @@
 @extends('layout.layout')
 @section('content')
+    @include('shared.messages.success_message')
     @include('users.card')
     <hr>
     @forelse($ideas as $idea)
