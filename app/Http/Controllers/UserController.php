@@ -13,15 +13,16 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.show', ['user' => $user]);
+        $ideas = $user->ideas()->paginate(5);
+        return view('users.show', ['user' => $user, 'ideas' => $ideas]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        return view('users.edit', ['user' => $user,]);
     }
 
     /**
@@ -30,5 +31,10 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         //
+    }
+
+    public function profile()
+    {
+        return $this->show(auth()->user());
     }
 }

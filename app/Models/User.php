@@ -20,6 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'bio',
+        'image'
     ];
 
     /**
@@ -47,11 +49,11 @@ class User extends Authenticatable
 
     public function ideas()
     {
-        return $this->hasMany(Idea::class, 'user_id', 'id');
+        return $this->hasMany(Idea::class, 'user_id', 'id')->latest();
     }
 
     public function comments()
     {
-        return $this->hasMany(Comment::class, 'user_id', 'id');
+        return $this->hasMany(Comment::class, 'user_id', 'id')->latest();
     }
 }
