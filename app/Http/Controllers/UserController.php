@@ -28,9 +28,22 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(User $user)
     {
-        //
+        $validated = request()->validate([
+            'name' => 'required|min:3|max:45',
+            'bio' => 'min:1|max:255',
+            'image' => 'image'
+        ]);
+
+        if (request()->has('image')) {
+            $imagePath = request()->file('image')->store('profile', 'public');
+            $validated['image'] = $imagePath;
+        }
+
+        $user->update($validated);
+
+        return redirect()->route('profile')->with('success', 'Profile updated');
     }
 
     public function profile()
