@@ -31,7 +31,7 @@ class AuthController extends Controller
 
         if (auth()->attempt($validated)) {
             request()->session()->regenerate();
-            Mail::to($user->email)->send(new WelcomeEmail($user));
+            // Mail::to($user->email)->send(new WelcomeEmail($user));
             return redirect()->route('feed')->with('success', 'Account created');
         }
 
