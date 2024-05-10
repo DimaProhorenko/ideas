@@ -11,7 +11,7 @@ class FeedController extends Controller
     public function index()
     {
 
-        $idea = Idea::orderBy('created_at', 'DESC');
+        $idea = Idea::with('comments.user')->orderBy('created_at', 'DESC');
 
         if (request()->has('search')) {
             $idea->where('body', 'like', '%' . request()->get('search') . '%');

@@ -3,8 +3,6 @@
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center gap-3">
                 @include('idea.profile_image')
-                {{-- <img style="width:50px" class="me-2 avatar-sm rounded-circle"
-                    src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Mario" alt="{{ $idea->user->name }}"> --}}
                 <div>
                     <h5 class="card-title mb-0"><a href="{{ route('users.show', $idea->user->id) }}">
                             {{ $idea->user->name }}
@@ -30,8 +28,7 @@
         </p>
         <div class="d-flex justify-content-between">
             <div>
-                <a href="#" class="fw-light nav-link fs-6"> <span class="fas fa-heart me-1">
-                    </span> {{ $idea->liked }} </a>
+                @include('idea.like_unlike')
             </div>
             <div>
                 <span class="fs-6 fw-light text-muted"> <span class="fas fa-clock"> </span>
